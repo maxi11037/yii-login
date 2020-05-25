@@ -39,7 +39,9 @@ AppAsset::register($this);
     ]);
 	//HACER GET ROL
 	//print_r(Yii::$app->user->identity);
-	//die();
+    //die();
+    
+    //va a buscar a la BBDD el usuario
 	if(Yii::$app->user->identity != null){//Esto verifica si existe el usuario o no, null si no existe
 		if(Yii::$app->user->identity->role == 10){
 			$rol = "Usuario";
