@@ -60,7 +60,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Usted es '.$rol],
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'About', 'url' => ['/site/about'], 'visible' => !Yii::$app->user->isGuest && $rolID == 20],
         ['label' => 'Contact', 'url' => ['/site/contact']],
         //['label' => '', 'url' => ['/'], 'visible' => !Yii::$app->user->isGuest && $rolID == 20],
     ];
