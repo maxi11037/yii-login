@@ -11,6 +11,12 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 use common\models\User;
+//use frontend\models\User;
+//use frontend\models\Rol;
+//$model = User::getRol(); 
+//print_r(User::findOne(1)->getRol());
+//die();
+//$model->myFunction();
 
 AppAsset::register($this);
 ?>
@@ -31,7 +37,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        //'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Juntar',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -41,23 +48,21 @@ AppAsset::register($this);
 	//print_r(Yii::$app->user->identity);
 	//die();
 	if(Yii::$app->user->identity != null){//Esto verifica si existe el usuario o no, null si no existe
-		if(Yii::$app->user->identity->role == 10){
-			$rol = "Usuario";
-		}
-		elseif(Yii::$app->user->identity->role == 20){
-			$rol = "Administrador";
-		}
+		$rol = User::findOne(Yii::$app->user->identity->id)->rol->nombre;
+		$rolID = User::findOne(Yii::$app->user->identity->id)->rol->id;
 	}
 	else{
 		$rol = "Invitado";
 	}
 	//HACER GET ROL
-	
+	//print_r($model->rol);
+	//die();
     $menuItems = [
         ['label' => 'Usted es '.$rol],
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
+        //['label' => '', 'url' => ['/'], 'visible' => !Yii::$app->user->isGuest && $rolID == 20],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
