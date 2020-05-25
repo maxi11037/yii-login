@@ -227,4 +227,8 @@ class User extends ActiveRecord implements IdentityInterface
 		  }
 			
 	}
+	public function getRol()
+    {
+        return $this->hasOne(Rol::className(), ['id' => 'role']);
+    }
 }
